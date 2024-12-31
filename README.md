@@ -142,7 +142,7 @@
 ## Siri 與 自動化
 「捷徑」(Shortcuts) 是 Apple 在 iOS、iPadOS 和 macOS 系統中內建的一款強大的自動化工具，它允許用戶將多個步驟組合成一個「捷徑」，通過點擊、語音指令（Siri）或自動化觸發來執行。
 
-> #### 點擊[連結](https://www.icloud.com/shortcuts/8f9acc988913453d9b3bc77be8f518a0)下載此捷徑腳本
+> #### 點擊[連結](https://www.icloud.com/shortcuts/d0a103f5f44c404f956df291a01a76a3)下載此捷徑腳本
 
 ### 使用 Siri 語音指令
 
