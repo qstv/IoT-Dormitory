@@ -135,9 +135,9 @@
 
 
 ## DEMO影片
-[IoT Dormitory Project Demo](https://youtu.be/eM01aYHSQus)
+[IoT Dormitory Project Demo](https://youtu.be/jn-hajnLU68)
 
-[![IoT Dormitory Project Demo](https://img.youtube.com/vi/eM01aYHSQus/0.jpg)](https://youtu.be/eM01aYHSQus)
+[![IoT Dormitory Project Demo](https://img.youtube.com/vi/jn-hajnLU68/0.jpg)](https://youtu.be/jn-hajnLU68)
 
 ## Siri 與 自動化
 「捷徑」(Shortcuts) 是 Apple 在 iOS、iPadOS 和 macOS 系統中內建的一款強大的自動化工具，它允許用戶將多個步驟組合成一個「捷徑」，通過點擊、語音指令（Siri）或自動化觸發來執行。
