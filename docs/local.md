@@ -68,7 +68,7 @@
        IP=YOUR_MI_IR_CONTROLLER_IP
        TOKEN=YOUR_MI_IR_CONTROLLER_TOKEN
        ```
-    *   建立 **Discord 機器人與取得 TOKEN** : 
+    *   **建立 Discord 機器人與取得 TOKEN** : 
         - 第1步: 請至 [Discord Developer Portal](https://discord.com/developers/applications) 建立一個應用程式並取名。
         ![discord_1](/docs/discord_1.png)
 
