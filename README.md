@@ -2,12 +2,16 @@
 
 ## 專案簡介
 
-在宿舍房間裡，我們常常幻想能舒舒服服地坐在座位或躺在床上，就輕鬆控制電燈，特別是當大家已經爬上床滑著手機，準備入睡的時候，最痛苦的莫過於決定某個倒楣鬼下床關燈的時刻。本專案致力於打造一個舒適的物聯網宿舍，一切都可以用手機、聲控或設定自動化來達成，使用 Raspberry Pi、多種感測器、 Flask API，透過  Discord 機器人、Siri shortcuts 等方式進行控制。。
+在宿舍房間裡，我們常常幻想能舒舒服服地坐在座位或躺在床上，就輕鬆控制電燈，特別是當大家已經爬上床滑著手機，準備入睡的時候，最痛苦的莫過於決定某個倒楣鬼下床關燈的時刻。本專案致力於打造一個舒適的物聯網宿舍，一切都可以用手機、聲控或設定自動化來達成，使用 Raspberry Pi、多種感測器、 MQTT、Flask API，透過  Discord 機器人、Siri shortcuts 等方式進行控制。
 
+> 可以先看看 [DEMO](https://youtu.be/jn-hajnLU68) 影片。
 ## 目錄
 
 1.  [功能簡介](#功能簡介)
 2.  [快速開始](#快速開始)
+    * [Raspberry Pi 相關程式說明](/docs/raspberry-pi.md)
+    * [使用 Vercel 部署 Flask API 說明文件](/docs/Vercel.md)
+    * [本地端相關程式碼說明文件](/docs/local.md)
 3.  [檔案結構](#檔案結構)
 4.  [硬體元件](#硬體元件)
 5.  [電路接法](#電路接法)
@@ -30,11 +34,11 @@
 7.  **感應夜燈模式：** 在偵測到人體移動時，自動開啟夜燈。
 8.  **智慧鬧鐘：** 可以根據手機鬧鐘時間自動開啟宿舍大燈。
 9.  **遠端控制宿舍天花板電風扇：** 透過Discord控制電風扇的開關。
-10. **其他自訂的自動化操作：** 透過 [API](/docs/API.md) 可以根據需求自訂其他自動化操作。
+10. **其他自訂的自動化操作：** 透過參考 [API 文件](/docs/API.md) ，可以根據需求自訂其他自動化操作。
 
 ## 快速開始
 
-立刻開始打造您的智慧宿舍！
+立刻開始打造您的物聯網宿舍！
 
 ### 第一步
 
@@ -47,21 +51,21 @@
     *   [Vercel](https://vercel.com/)
 
 ### 第二步
-1.  **Raspberry Pi 設定：** 首先，依照 [Raspberry Pi 相關程式說明](/docs/raspberry-pi.md) 完成安裝及設定。
+1.  **Raspberry Pi 設定：** 首先，依照 [Raspberry Pi 相關程式說明](/docs/raspberry-pi.md) 完成安裝及設定，確保所有硬體元件都可以正常運作及控制。
 2.  **Vercel 設定：** 接著，依照 [使用 Vercel 部署 Flask API 說明文件](/docs/Vercel.md) 完成部署及設定。
-3.  **本地端設定：** 最後，依照 [本地端相關程式碼說明文件](/docs/local.md) 完成安裝及設定。
+3.  **本地端設定：** 最後，依照 [本地端相關程式碼說明文件](/docs/local.md) 的說明，建立一個 Discord 機器人。
 
 ### 第三步
 
-**恭喜！** 您已完成 IoT 智慧宿舍的快速設定。現在您可以開始享受智慧化的宿舍生活了！
+**恭喜！** 您已完成物聯網宿舍系統的快速設定，現在您可以用 Discord 開始享受智慧化的宿舍生活了！除此之外，您還可以發揮創意，或是根據自身需求設定更加有趣的玩法，可以查看 [siri與自動化](#siri-與-自動化) 章節。
 
 ## 檔案結構
 
-本專案的程式碼主要分為以下幾個目錄：
+本專案的程式碼主要分為以下三個資料夾：
 
-*   **`local/`：**  這個目錄存放著與本地開發環境相關的檔案。
-*   **`raspberry pi/`：** 這個目錄包含了運行在 Raspberry Pi 上的主要程式碼和相關模組，用於控制硬體元件和 MQTT 通訊。
-*   **`Vercel/`：** 這個目錄包含了部署到 Vercel 平台的 Flask API 相關程式碼，作為控制中樞。
+*   **`local/`：**  這個資料夾放著在本地端運行的 Discord 機器人與紅外線設定相關的檔案。
+*   **`raspberry pi/`：** 這個資料夾包含了運行在 Raspberry Pi 上的主要程式碼和相關模組，用於控制硬體元件和 MQTT 通訊。
+*   **`Vercel/`：** 這個資料夾包含了部署到 Vercel 平台的 Flask API 相關程式碼，作為控制中樞。
 
 ## 硬體元件
 
@@ -85,40 +89,43 @@
 
 ## 電路接法
 [[返回快速開始](#快速開始)]
+> [!NOTE]
+> 請善用麵包板將電路正確連接至以下所指示的 Raspberry Pi 腳位。
+
 1.  **兩個伺服馬達 (Servo Motors):**
-    *   紅線接 Raspberry Pi 的 5V 腳位。
-    *   棕線接 Raspberry Pi 的 GND 腳位。
-    *   作為 **開燈** 使用的橘線接 Raspberry Pi 的 GPIO 17。
-    *   作為 **關燈** 使用的橘線接 Raspberry Pi 的 GPIO 18。
+    *   紅線接 Raspberry Pi 的 `5V` 腳位。
+    *   棕線接 Raspberry Pi 的 `GND` 腳位。
+    *   作為 **開燈** 使用的橘線接 Raspberry Pi 的 `GPIO 17`。
+    *   作為 **關燈** 使用的橘線接 Raspberry Pi 的 `GPIO 18`。
 
 2.  **L298N 馬達控制模組 (Motor Control Module):**
     *   `OUT1` 和 `OUT2` 接 5V LED 燈條的正負極。
-    *   `IN1` 接 Raspberry Pi 的 GPIO 22。
-    *   `IN2` 接 Raspberry Pi 的 GPIO 27。
+    *   `IN1` 接 Raspberry Pi 的 `GPIO 22`。
+    *   `IN2` 接 Raspberry Pi 的 `GPIO 27`。
     *   `VCC` 接 6V 電池組的正極。
     *   `GND` 接 6V 電池組的負極。
 
 3.  **線性霍爾磁力感測模組 (Hall Effect Sensor):**
-    *   將模組的 VCC 接 Raspberry Pi 的 3.3V 腳位。
-    *   將模組的 GND 接 Raspberry Pi 的 GND 腳位。
-    *   將模組的 D0 (數位訊號) 接 Raspberry Pi 的 GPIO 23。
+    *   將模組的 `VCC` 接 Raspberry Pi 的 `3.3V` 腳位。
+    *   將模組的 `GND` 接 Raspberry Pi 的 `GND` 腳位。
+    *   將模組的 `D0` (數位訊號) 接 Raspberry Pi 的 `GPIO 23`。
 
 4.  **無源蜂鳴器(沒有HSD字樣)(Passive Buzzer):**
-    *   正極接 Raspberry Pi 的 GPIO 21。
-    *   負極接 Raspberry Pi 的 GND 腳位。
+    *   正極接 Raspberry Pi 的 `GPIO 21`。
+    *   負極接 Raspberry Pi 的 `GND` 腳位。
 
 5.  **DHT22 溫濕度感應器 (Temperature/Humidity Sensor):**
-    *   VCC 接 Raspberry Pi 的 3.3V 腳位。
-    *   GND 接 Raspberry Pi 的 GND 腳位。
-    *   DAT 接 Raspberry Pi 的 GPIO 2。
+    *   `VCC` 接 Raspberry Pi 的 `3.3V` 腳位。
+    *   `GND` 接 Raspberry Pi 的 `GND` 腳位。
+    *   `DAT` 接 Raspberry Pi 的 `GPIO 2`。
 
 6.  **攝影鏡頭 (Camera Module):**
     *   將攝影鏡頭的排線小心地插入 Raspberry Pi 上專為鏡頭設計的排線槽。
 
 7.  **紅外線運動感測器 (PIR Motion Sensor):**
-    *   VCC 接 Raspberry Pi 的 5V 腳位。
-    *   GND 接 Raspberry Pi 的 GND 腳位。
-    *   OUT 接 Raspberry Pi 的 GPIO 16。
+    *   `VCC` 接 Raspberry Pi 的 `5V` 腳位。
+    *   `GND` 接 Raspberry Pi 的 `GND` 腳位。
+    *   `OUT` 接 Raspberry Pi 的 `GPIO 16`。
 
 ## 電路實際照片
 <p align="center">
@@ -135,16 +142,17 @@
 
 
 ## DEMO影片
-[IoT Dormitory Project Demo](https://youtu.be/jn-hajnLU68)
+YouTube : [IoT Dormitory Project Demo](https://youtu.be/jn-hajnLU68)
 
 [![IoT Dormitory Project Demo](https://img.youtube.com/vi/jn-hajnLU68/0.jpg)](https://youtu.be/jn-hajnLU68)
 
 ## Siri 與 自動化
 「捷徑」(Shortcuts) 是 Apple 在 iOS、iPadOS 和 macOS 系統中內建的一款強大的自動化工具，它允許用戶將多個步驟組合成一個「捷徑」，通過點擊、語音指令（Siri）或自動化觸發來執行。
 
-> #### 點擊[連結](https://www.icloud.com/shortcuts/d0a103f5f44c404f956df291a01a76a3)下載此捷徑腳本
+> #### 點擊[連結](https://www.icloud.com/shortcuts/d0a103f5f44c404f956df291a01a76a3)下載本專案使用的捷徑腳本
+>在加入之前，需要先設定此捷徑 ，請依照畫面的提示，在文字輸入框中填入你的 Flask API 的 Base URL (https://<你的vercel網址>)。
 
-### 使用 Siri 語音指令
+### 嘿 Siri
 
 1. 下載設定完成捷徑後，你可以對著你的裝置說出：「**嘿 Siri，倒楣鬼**」。
 2. 可使用的指令如下：
@@ -176,10 +184,10 @@
      * 在搜尋欄中輸入 **執行捷徑**，並點擊 `執行捷徑` 動作，選擇剛剛下載的｢倒楣鬼｣這個捷徑。
 9. **點擊「完成」。**
 
+透過自動化與捷徑，你能盡情發揮自己的創意，創造出更多符合自身需求的功能。
 
-
-
-
+> [!NOTE]
+> 如果沒有捷徑(Shortcuts)，也可以使用 Android 的 [Tasker](https://play.google.com/store/apps/details?id=net.dinglisch.android.taskerm) App，或是 [IFTTT](https://ifttt.com/)、[Zapier](https://zapier.com/) 等服務達到類似的自動化效果，請參考 [API 文件](/docs/API.md) ，根據自身需求自訂自動化操作。
 
 ## 參考資料
 
