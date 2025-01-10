@@ -44,10 +44,10 @@
 
 ### 第一步
 
-1.  **準備硬體：** 確認您已備妥所有 [硬體元件](#硬體元件)。
+1.  **準備硬體：** 確認已備妥所有 [硬體元件](#硬體元件)。
 2.  **連接電路：** 依照 [電路接法](#電路接法) 的指示，仔細地將各個感測器和致動器連接到 Raspberry Pi 和麵包板。
 3.  **註冊 HiveMQ：** HiveMQ Cloud 是一個基於雲端的 MQTT 訊息代理服務，這是樹莓派跟 Flask API 之間通訊的橋樑。請前往 [HiveMQ Cloud](https://www.hivemq.com/) 註冊，註冊後請先**建立**一個Cluster。
-4.  **其他相關服務：** 確保您擁有以下網站帳號：
+4.  **其他相關服務：** 確保擁有以下網站帳號：
     *   [Discord](https://discord.com/)
     *   [Github](https://github.com/)
     *   [Vercel](https://vercel.com/)
